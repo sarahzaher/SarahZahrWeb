@@ -213,7 +213,7 @@ html, body {
 }
 @media (min-width: 768px) {
     .BodyWithFooterAndNav {
-        height: calc(100% - 208px);
+        height: calc(100% - 175px);
     }
 }
     Main {
@@ -274,23 +274,23 @@ html, body {
     }
 
     .zoom2:hover {
-        transform: scale(1.1);
+        transform: scale(1.05);
         cursor: pointer;
     }
 
     .zoom2Perm {
-        transform: scale(1.1);
+        transform: scale(1.05);
         cursor: pointer;
         border: #e44d94 solid;
     }
 
     .zoom:hover {
-        transform: scale(1.2);
+        transform: scale(1.1);
         cursor: pointer;
     }
 
     .zoomPerm {
-        transform: scale(1.2);
+        transform: scale(1.1);
         cursor: pointer;
         border: #e44d94 solid;
     }
@@ -302,7 +302,7 @@ html, body {
     @media (min-width: 768px) {
         #MainLogo {
             display: flex;
-            width: 150px;
+            width: 110px;
             float: left;
             position: absolute;
         }
@@ -423,10 +423,10 @@ html, body {
     /*  End of intro section  */
 
     /*  UserInput Section  */
-    #UserInput #firstRow {
+    /*#UserInput #firstRow {
         margin-top: 50px;
         margin-bottom: 10px;
-    }
+    }*/
 
     .userInputImg {
         height: 120px;
@@ -522,9 +522,16 @@ html, body {
 
 
 
-    #CustomRooms .SelectedModelCountainer {
-        border: #e44d94 solid;
-    }
+#CustomRooms .SelectedModelCountainer {
+    /*border: #e44d94 solid;*/
+    width: 100%;
+    height: 100%;
+    background: #e34d9417;
+    float: left;
+    border: 2px solid #000;
+    outline: 1px dashed #fff;
+    outline-offset: -10px;
+}
 
     /*  End of room selector */
     /*Checkout*/
@@ -536,7 +543,7 @@ html, body {
 
         100% {
             transform: rotate(xx);
-            font-size: 80px;
+            font-size: 60px;
         }
     }
 

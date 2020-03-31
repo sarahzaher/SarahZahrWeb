@@ -7,37 +7,37 @@
         <div class="col-12">
             <div class="row @(buttonCount > 1 ? "modelRowWithOptions": "modelRow")">
                 <div class="col-12 col-md-6 text-center @bedroomContainerCss" @onclick="@(() => SetSelectedContainer("Bedroom"))">
-                    <div class="d-flex justify-content-center align-items-center heading">
+                    <div class="">
                         <h3>Bedroom</h3>
                     </div>
-                    <div class="d-md-flex justify-content-md-center align-items-md-center p-3 modelContainer">
+                    <div class="">
                         <img class="img-fluid RoomObj" src="@bedrooms.FirstOrDefault(c => c.Key == selectedBedroom).Path">
                     </div>
                 </div>
                 <div class="col-12 col-md-6 text-center @kitchenContainerCss" @onclick="@(() => SetSelectedContainer("Kitchen"))">
-                    <div class="d-flex justify-content-center align-items-center heading">
+                    <div class="">
                         <h3>Kitchen</h3>
                     </div>
 
-                    <div class="d-md-flex justify-content-md-center align-items-md-center p-3 modelContainer">
+                    <div class="">
                         <img class="img-fluid RoomObj" src="@kitchens.FirstOrDefault(c => c.Key == selectedKitchen).Path">
                     </div>
                 </div>
             </div>
             <div class="row @(buttonCount > 1 ? "modelRowWithOptions": "modelRow")">
                 <div class="col-12 col-md-6 text-center @livingRoomContainerCss" @onclick="@(() => SetSelectedContainer("LivingRoom"))">
-                    <div class="d-flex justify-content-center align-items-center heading">
+                    <div class="">
                         <h3>Living Room</h3>
                     </div>
-                    <div class="d-md-flex justify-content-md-center align-items-md-center p-3 modelContainer">
+                    <div class="">
                         <img class="img-fluid RoomObj" src="@livingRooms.FirstOrDefault(c => c.Key == selectedLivingRoom).Path">
                     </div>
                 </div>
                 <div class="col-12 col-md-6 text-center @annexeContainerCss" @onclick="@(() => SetSelectedContainer("Annexe"))">
-                    <div class="d-flex justify-content-center align-items-center heading">
+                    <div class="">
                         <h3>Annexe</h3>
                     </div>
-                    <div class="d-md-flex justify-content-md-center align-items-md-center p-3 modelContainer">
+                    <div class="">
                         <img class="img-fluid RoomObj" src="@annexes.FirstOrDefault(c => c.Key == selectedAnnex).Path">
                     </div>
                 </div>

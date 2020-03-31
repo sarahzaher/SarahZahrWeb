@@ -1,0 +1,277 @@
+﻿@page "/RoomSelector"
+@inject Blazored.SessionStorage.ISyncSessionStorageService sessionStorage
+    <NavBar selectedPage="3"/>
+
+<main id="CustomRooms" class="container-fluid BodyWithFooterAndNav">
+    <div class="row" style="height:100%">
+        <div class="col-12">
+            <div class="row @(buttonCount > 1 ? "modelRowWithOptions": "modelRow")">
+                <div class="col-12 col-md-6 text-center @bedroomContainerCss" @onclick="@(() => SetSelectedContainer("Bedroom"))">
+                    <div class="d-flex justify-content-center align-items-center heading">
+                        <h3>Bedroom</h3>
+                    </div>
+                    <div class="d-md-flex justify-content-md-center align-items-md-center p-3 modelContainer">
+                        <img class="img-fluid RoomObj" src="@bedrooms.FirstOrDefault(c => c.Key == selectedBedroom).Path">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 text-center @kitchenContainerCss" @onclick="@(() => SetSelectedContainer("Kitchen"))">
+                    <div class="d-flex justify-content-center align-items-center heading">
+                        <h3>Kitchen</h3>
+                    </div>
+
+                    <div class="d-md-flex justify-content-md-center align-items-md-center p-3 modelContainer">
+                        <img class="img-fluid RoomObj" src="@kitchens.FirstOrDefault(c => c.Key == selectedKitchen).Path">
+                    </div>
+                </div>
+            </div>
+            <div class="row @(buttonCount > 1 ? "modelRowWithOptions": "modelRow")">
+                <div class="col-12 col-md-6 text-center @livingRoomContainerCss" @onclick="@(() => SetSelectedContainer("LivingRoom"))">
+                    <div class="d-flex justify-content-center align-items-center heading">
+                        <h3>Living Room</h3>
+                    </div>
+                    <div class="d-md-flex justify-content-md-center align-items-md-center p-3 modelContainer">
+                        <img class="img-fluid RoomObj" src="@livingRooms.FirstOrDefault(c => c.Key == selectedLivingRoom).Path">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 text-center @annexeContainerCss" @onclick="@(() => SetSelectedContainer("Annexe"))">
+                    <div class="d-flex justify-content-center align-items-center heading">
+                        <h3>Annexe</h3>
+                    </div>
+                    <div class="d-md-flex justify-content-md-center align-items-md-center p-3 modelContainer">
+                        <img class="img-fluid RoomObj" src="@annexes.FirstOrDefault(c => c.Key == selectedAnnex).Path">
+                    </div>
+                </div>
+            </div>
+            <div class="row @(buttonCount > 1 ? "d-flex": "d-none") " id="Controls">
+                <div class="col-12 d-flex justify-content-center align-items-center " style="max-height:100%">
+                    @for (int i = 0; i < buttonCount; i++)
+                    {
+                        var tempI = i + 1;
+                        <div class="btnRoomOption btnOption1 d-flex justify-content-center align-items-center rounded zoom2 @optionCss[i]" @onclick="@(() => { SetSelectedOption(tempI); })">
+                            @(i + 1)
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+
+<Footer NextIsVisible="true" PrevIsVisible="true" Next="Checkout" Previous="SelectResident" />
+@code {
+
+    [Parameter]
+    public string[] optionCss { get; set; }
+
+    [Parameter]
+    public string bedroomContainerCss { get; set; }
+    [Parameter]
+    public string kitchenContainerCss { get; set; }
+    [Parameter]
+    public string livingRoomContainerCss { get; set; }
+    [Parameter]
+    public string annexeContainerCss { get; set; }
+
+    
+
+    [Parameter]
+    public List<ValueKey> kitchens { get; set; }
+    [Parameter]
+    public List<ValueKey> bedrooms { get; set; }
+    [Parameter]
+    public List<ValueKey> livingRooms { get; set; }
+    [Parameter]
+    public List<ValueKey> annexes { get; set; }
+
+    [Parameter]
+    public string selectedContainer { get; set; }
+
+    [Parameter]
+    public int selectedKitchen { get; set; }
+    [Parameter]
+    public int selectedBedroom { get; set; }
+    [Parameter]
+    public int selectedLivingRoom { get; set; }
+    [Parameter]
+    public int selectedAnnex { get; set; }
+
+    [Parameter]
+    public AppModel model { get; set; }
+    [Parameter]
+    public int buttonCount { get; set; }
+
+
+    protected override void OnInitialized()
+    {
+
+        model = sessionStorage.GetItem<AppModel>("AppModel") ?? new AppModel();
+
+        selectedKitchen = model.kitchen > 0 ? model.kitchen : 1;
+        selectedLivingRoom = model.livingRoom > 0 ? model.livingRoom : 1;
+        selectedBedroom = model.bedroom > 0 ? model.bedroom : 1;
+        selectedAnnex = model.annexe > 0 ? model.annexe : 1;
+        selectedContainer = model.selectedModelContainer ?? "Kitchen";
+
+        initializeModels();
+        SetSelectedContainer(selectedContainer);
+    }
+
+    void initializeModels()
+    {
+        //status :
+        //option 1 = single
+        //option 2 = student
+        //option 3 = Family
+        //option 4 = Old
+        if (model.Status == "Single")
+        {
+            kitchens = new List<ValueKey> { new ValueKey { Key = 1, Path = "Content/img/Kitchen_3_C.png" }, };
+            livingRooms = new List<ValueKey> { new ValueKey { Key = 1, Path = "Content/img/Living_Room_3_C.png" }, };
+            bedrooms = new List<ValueKey> { new ValueKey { Key = 1, Path = "Content/img/Bedroom_4_C.png" }, };
+            annexes = new List<ValueKey> { new ValueKey { Key = 1, Path = "" }, };
+
+        }
+
+        else if (model.Status == "Student")
+        {
+            kitchens = new List<ValueKey> { new ValueKey { Key = 1, Path = "Content/img/Kitchen_2_T.png" }, };
+            livingRooms = new List<ValueKey> { new ValueKey { Key = 1, Path = "Content/img/Living_Room_2_T.png" }, };
+            bedrooms = new List<ValueKey> { new ValueKey { Key = 1, Path = "Content/img/Bedroom_2_T.png" }, };
+            annexes = new List<ValueKey> { new ValueKey { Key = 1, Path = "Content/img/Annexe_2_T.png" }, };
+        }
+        else if (model.Status == "Family")
+        {
+
+            kitchens = new List<ValueKey> { new ValueKey { Key = 1, Path = "Content/img/Kitchen_4_C.png" }, };
+            livingRooms = new List<ValueKey> { new ValueKey { Key = 1, Path = "Content/img/Living_Room_4_C.png" },new ValueKey { Key = 2, Path = "Content/img/Living_Room_5_C.png" }, };
+            bedrooms = new List<ValueKey> { new ValueKey { Key = 1, Path = "Content/img/Bedroom_5_C.png" }, new ValueKey { Key = 2, Path = "Content/img/Bedroom_5_Master_C.png" }, };
+            annexes = new List<ValueKey> { new ValueKey { Key = 1, Path = "Content/img/Annexe_3_T.png" }, };
+        }
+        else if (model.Status == "Old")
+        {
+            kitchens = new List<ValueKey> { new ValueKey { Key = 1, Path = "Content/img/Kitchen_1_T.png" }, };
+            livingRooms = new List<ValueKey> { new ValueKey { Key = 1, Path = "Content/img/Living_Room_1_T.png" }, };
+            bedrooms = new List<ValueKey> { new ValueKey { Key = 1, Path = "Content/img/Bedroom_1_T.png" }, };
+            annexes = new List<ValueKey> { new ValueKey { Key = 1, Path = "Content/img/Annexe_1_T.png" }, };
+
+        }
+        else
+        {
+
+            kitchens = new List<ValueKey> {
+             new ValueKey { Key = 1, Path = "Content/img/Kitchen_1_T.png" },
+             new ValueKey { Key = 2, Path = "Content/img/Kitchen_2_T.png" },
+             new ValueKey { Key = 3, Path = "Content/img/Kitchen_3_C.png" },
+             new ValueKey { Key = 4, Path = "Content/img/Kitchen_4_C.png" }
+        };
+
+            livingRooms = new List<ValueKey> {
+                new ValueKey { Key = 1, Path = "Content/img/Living_Room_1_T.png" } ,
+             new ValueKey { Key = 2, Path = "Content/img/Living_Room_2_T.png" },
+             new ValueKey { Key = 3, Path = "Content/img/Living_Room_3_C.png" },
+             new ValueKey { Key = 4, Path = "Content/img/Living_Room_4_C.png" },
+             new ValueKey { Key = 5, Path = "Content/img/Living_Room_5_C.png" }
+         };
+
+            bedrooms = new List<ValueKey> {
+                new ValueKey { Key = 1, Path = "Content/img/Bedroom_1_T.png" },
+                new ValueKey { Key = 2, Path = "Content/img/Bedroom_2_T.png" },
+                new ValueKey { Key = 3, Path = "Content/img/Bedroom_3_C.png" },
+                new ValueKey { Key = 4, Path = "Content/img/Bedroom_4_C.png" },
+                new ValueKey { Key = 5, Path = "Content/img/Bedroom_5_C.png" }
+        };
+            annexes = new List<ValueKey> {
+                new ValueKey { Key = 1, Path = "Content/img/Annexe_1_T.png" },
+                new ValueKey { Key = 2, Path = "Content/img/Annexe_2_T.png" },
+                new ValueKey { Key = 3, Path = "Content/img/Annexe_3_T.png" }
+        };
+
+        }
+    }
+    void SetSelectedContainer(string container)
+    {
+
+        selectedContainer = container;
+        model.selectedModelContainer = container;
+        kitchenContainerCss = selectedContainer == "Kitchen" ? "SelectedModelCountainer" : "";
+        livingRoomContainerCss = selectedContainer == "LivingRoom" ? "SelectedModelCountainer" : "";
+        bedroomContainerCss = selectedContainer == "Bedroom" ? "SelectedModelCountainer" : "";
+        annexeContainerCss = selectedContainer == "Annexe" ? "SelectedModelCountainer" : "";
+        sessionStorage.SetItem("AppModel", model);
+        LoadButtons();
+
+    }
+
+
+    void SetSelectedOption(int option)
+    {
+        setOptionHighlight(option);
+        if (selectedContainer == "Kitchen")
+        {
+            selectedKitchen = option;
+            model.kitchen = selectedKitchen;
+        }
+        if (selectedContainer == "Bedroom")
+        {
+            selectedBedroom = option;
+            model.bedroom = selectedBedroom;
+
+        }
+        if (selectedContainer == "LivingRoom")
+        {
+            selectedLivingRoom = option;
+            model.livingRoom = selectedLivingRoom;
+
+        }
+        if (selectedContainer == "Annexe")
+        {
+            selectedAnnex = option;
+            model.annexe = selectedAnnex;
+
+        }
+
+        sessionStorage.SetItem("AppModel", model);
+
+
+    }
+
+    void setOptionHighlight(int option)
+    {
+        for (int i = 0; i < buttonCount; i++)
+            optionCss[i] = i == (option - 1) ? "zoom2Perm" : "";
+
+    }
+
+    void LoadButtons()
+    {
+        switch (selectedContainer)
+        {
+            case "Kitchen":
+                buttonCount = kitchens.Count;
+                break;
+            case "LivingRoom":
+                buttonCount = livingRooms.Count;
+                break;
+            case "Annexe":
+                buttonCount = annexes.Count;
+                break;
+            case "Bedroom":
+                buttonCount = bedrooms.Count;
+                break;
+        }
+        optionCss = new string[buttonCount];
+
+    }
+
+
+
+    public class ValueKey
+    {
+        public int Key { get; set; }
+        public string Path { get; set; }
+    }
+
+}

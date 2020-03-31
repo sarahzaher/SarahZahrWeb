@@ -1,7 +1,62 @@
 ﻿@page "/"
+@inject NavigationManager NavigationManager
 
-<h1>Hello, world!</h1>
 
-Welcome to your new app.
+@*<div class="bg" style="background-image:url('Content/img/Main_Background.jpg')">
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+
+    </div>*@
+
+
+
+<main class="d-flex justify-content-center align-items-center container BodyWithoutFooter" id="WelcomePage">
+    <div>
+
+        <div class="row d-md-flex d-none">
+            <div class="col">
+                <video class="img-fluid" id="StartAnimation" loop autoplay="autoplay" muted="muted">
+                    <source src="Content/videos/start.mp4" type="video/mp4">
+
+                </video>
+
+            </div>
+        </div>
+        <div class="row d-md-flex d-none" style="margin-top:-100px">
+            <div class="col text-center m-3">
+                <img class="img-fluid zoom2" id="btnStart" src="Content/icon/btn_start_T.png" @onclick="NavigateToIntroComponent">
+            </div>
+        </div>
+
+
+        <div class="row d-md-none d-flex">
+            <div class="col">
+                <img class="img-fluid" src="Content/icon/logo_T.png">
+            </div>
+        </div>
+        <div class="row d-md-none d-flex">
+            <div class="col text-center m-3">
+                <img class="img-fluid zoom2" id="btnStart" src="Content/icon/btn_start_T.png" @onclick="NavigateToIntroComponent">
+            </div>
+        </div>
+        <div id="test"></div>
+    </div>
+</main>
+
+
+
+@code{
+
+    private void NavigateToIntroComponent()
+    {
+    
+        NavigationManager.NavigateTo("intro");
+
+    }
+    protected override void OnInitialized()
+    {
+      
+
+    }
+ 
+
+}

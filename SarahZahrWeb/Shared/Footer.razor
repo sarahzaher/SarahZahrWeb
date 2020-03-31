@@ -1,0 +1,59 @@
+﻿@inject NavigationManager NavigationManager
+
+
+
+<footer class="footer">
+    <div class="row m-0 h-100">
+        <div class="col-sm-10 col-md-6 offset-sm-1 offset-md-3 m-auto">
+            @if (PrevIsVisible)
+            {<img @onclick="@(() => { NavigateToComponent("Prev"); })" class="float-left zoom" src="Content/icon/@imgPrev" style="width: 70px;height: 70px;">}
+            @if (NextIsVisible)
+            {<img @onclick="@(() => { NavigateToComponent("Next"); })" class="float-right zoom" src="Content/icon/@imgNext" style="width: 70px;height: 70px;">}
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+@code{
+
+    [Parameter]
+    public string Next { get; set; }
+    [Parameter]
+    public string Previous { get; set; }
+    [Parameter]
+    public bool NextIsVisible { get; set; }
+    [Parameter]
+    public bool PrevIsVisible { get; set; }
+    [Parameter]
+    public string imgNext { get; set; }
+    [Parameter]
+    public string imgPrev { get; set; }
+
+    protected override void OnInitialized()
+    {
+        imgPrev = "btnBackFullName_T.png";
+        imgNext = "next_T.png";
+        if (Next == "RoomSelector")
+            imgNext = "btnDesign_T.png";
+        else if (Previous == "RoomSelector")
+            imgPrev = "btnDesign_T.png";
+        if (Next == "Build")
+            imgNext = "btnBuild_T.png";
+        else if (Previous == "Build")
+            imgPrev = "btnBuild_T.png";
+
+
+
+
+    }
+
+    private void NavigateToComponent(string page)
+    {
+        NavigationManager.NavigateTo(page == "Next" ? Next : Previous);
+    }
+
+
+}

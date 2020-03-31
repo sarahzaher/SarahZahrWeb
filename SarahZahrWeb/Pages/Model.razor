@@ -1,0 +1,40 @@
+﻿@page "/Models"
+
+<section id="Model">
+    <div class="d-flex justify-content-center align-items-center" id="the90div">
+        <div>
+            <div class="row">
+                <div class="col text-center">
+                    <p>Choose your Bedroom</p>
+                </div>
+            </div>
+            <div class="row" style="height: 100%;">
+                <div class="col"><img class="img-fluid MainImg" src="@imgPath"></div>
+            </div>
+            <div class="row">
+                <div class="col text-center m-3">
+                    <img @onclick="@(() => SwitchImg("Place_Type_Bedroom.jpg"))" class="btnoption zoom2" src="Content/img/Place_Type_Bedroom_btn1.jpg">
+                    <img @onclick="@(() => SwitchImg("Place_Type_Kitchen.jpg"))" class="btnoption zoom2" src="Content/img/Place_Type_Bedroom_btn2.jpg">
+                    <img @onclick="@(() => SwitchImg("Place_Type_LivingRoom.jpg"))" class="btnoption zoom2" src="Content/img/Place_Type_Bedroom_btn3.jpg">
+                    <img @onclick="@(() => SwitchImg("Place_Type_Annexe.jpg"))" class="btnoption zoom2" src="Content/img/Place_Type_Bedroom_btn4.jpg">
+                </div>
+            </div>
+        </div>
+    </div>
+    <Footer NextIsVisible="true" PrevIsVisible="true" Next="Models" Previous="SelectResident" />
+</section>
+
+@code {
+
+    [Parameter]
+    public string imgPath { get; set; }
+
+        protected override void OnInitialized()
+        {
+        imgPath = "Content/img/Place_Type_Bedroom.jpg";
+            base.OnInitialized();
+        }
+        private void SwitchImg(string image) {
+        imgPath = "Content/img/" + image;
+    }
+}

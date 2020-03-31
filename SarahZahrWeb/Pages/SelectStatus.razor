@@ -1,0 +1,81 @@
+﻿
+@page "/SelectStatus"
+@inject Blazored.SessionStorage.ISyncSessionStorageService sessionStorage
+
+
+<NavBar selectedPage="1"/>
+<main class="d-flex justify-content-center align-items-center container BodyWithFooterAndNav" id="UserInput">
+    <div>
+        <div class="row" id="firstRow">
+            <div class="col text-center">
+                <p>USER INPUT</p>
+                <p>Select your status</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <div class="d-flex justify-content-center align-items-center zoom2 userInputOptions  @option1Css" style="background-color: #f4e0da;" @onclick="@(() => SetSelectedResident("Single"))">
+                    <img src="Content/icon/Single_T.png" class="img-fluid"/>
+                </div>
+
+            </div>
+            <div class="col text-center">
+                <div class="d-flex justify-content-center align-items-center zoom2 userInputOptions  @option2Css" style="background-color: #f4e0da;" @onclick="@(() => SetSelectedResident("Student"))">
+                    <img src="Content/icon/Student_T.png" class="img-fluid" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <div class="d-flex justify-content-center align-items-center zoom2 userInputOptions  @option3Css" style="background-color: #f4e0da;" @onclick="@(() => SetSelectedResident("Family"))">
+                    <img src="Content/icon/Family_T.png" class="img-fluid" />
+                </div>
+            </div>
+            <div class="col text-center">
+                <div class="d-flex justify-content-center align-items-center zoom2 userInputOptions  @option4Css" style="background-color: #f4e0da;" @onclick="@(() => SetSelectedResident("Old"))">
+                    <img src="Content/icon/Old_T.png" class="img-fluid" />
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<Footer NextIsVisible="true" PrevIsVisible="true" Next="SelectResident" Previous="Intro" />
+@code {
+    [Parameter]
+    public string option1Css { get; set; }
+    [Parameter]
+    public string option2Css { get; set; }
+    [Parameter]
+    public string option3Css { get; set; }
+    [Parameter]
+    public string option4Css { get; set; }
+
+    public AppModel model { get; set; }
+
+    void SetSelectedResident(string option)
+    {
+        model.Status = option;
+        sessionStorage.SetItem("AppModel", model);
+
+        option1Css = option == "Single" ? "zoom2Perm" : "";
+        option2Css = option == "Student" ? "zoom2Perm" : "";
+        option3Css = option == "Family" ? "zoom2Perm" : "";
+        option4Css = option == "Old" ? "zoom2Perm" : "";
+
+    }
+        //status :
+    //option 1 = single
+    //option 2 = student
+    //option 3 = Family
+    //option 4 = Old
+    protected override void OnInitialized()
+    {
+        model = sessionStorage.GetItem<AppModel>("AppModel") ?? new AppModel();
+        if (model.Status != null)
+        {
+            SetSelectedResident(model.Status);
+        }
+    }
+}

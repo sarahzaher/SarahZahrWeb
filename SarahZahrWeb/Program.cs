@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Text;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Blazored.SessionStorage;
 
 namespace SarahZahrWeb
 {
@@ -15,6 +16,7 @@ namespace SarahZahrWeb
             builder.RootComponents.Add<App>("app");
 
             builder.Services.AddBaseAddressHttpClient();
+            builder.Services.AddBlazoredSessionStorage();
 
             await builder.Build().RunAsync();
         }

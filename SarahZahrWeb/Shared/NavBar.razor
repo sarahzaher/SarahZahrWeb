@@ -1,0 +1,60 @@
+﻿@inject NavigationManager NavigationManager
+<img src="Content/icon/logo_T.png" id="MainLogo" />
+<div class="container-fluid d-none  d-md-flex justify-content-md-center align-items-md-center">
+
+    @*<div class="row">
+            <div class="progress" id="progress1">
+                <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
+                </div>
+                <span class="progress-type">Overall Progress</span>
+                <span class="progress-completed">20%</span>
+            </div>
+        </div>*@
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="row step">
+            <div id="div1" class="col-md-2 @active[0]" @onclick="@(() => { NavigateToComponent("SelectStatus"); })">
+                <span class="fa fa-user"></span>
+                <p>Status</p>
+            </div>
+            <div class="col-md-2 @active[1]" @onclick="@(() => { NavigateToComponent("SelectResident"); })">
+                <span class="fa fa-users"></span>
+                <p>Residents</p>
+            </div>
+            <div class="col-md-2 @active[2]" @onclick="@(() => { NavigateToComponent("RoomSelector"); })">
+                <span class="fa fa-object-ungroup"></span>
+                <p>Models</p>
+            </div>
+            <div class="col-md-2 @active[3]" @onclick="@(() => { NavigateToComponent("Checkout"); })">
+                <span class="fa fa-dollar"></span>
+                <p>Checkout</p>
+            </div>
+            <div class="col-md-2 @active[4]" @onclick="@(() => { NavigateToComponent("Plan"); })">
+                <span class="fa fa-map"></span>
+                <p>Plan</p>
+            </div>
+            <div id="last" class="col-md-2 @active[5]" @onclick="@(() => { NavigateToComponent("Build"); })">
+                <span class="fa fa-home"></span>
+                <p>Build</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string[] active { get; set; }
+    [Parameter]
+    public int selectedPage { get; set; }
+
+    protected override void OnInitialized()
+    {
+        active = new string[6];
+
+        active[selectedPage - 1] = "activestep";
+
+    }
+    private void NavigateToComponent(string page)
+    {
+        NavigationManager.NavigateTo(page);
+    }
+}

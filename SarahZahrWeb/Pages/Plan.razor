@@ -1,0 +1,98 @@
+﻿
+@page "/Plan"
+@inject Blazored.SessionStorage.ISyncSessionStorageService sessionStorage
+
+    <NavBar selectedPage="5"/>
+
+<main id="Plan" class="BodyWithFooterAndNav container-fluid">
+    <div class="row" style="height:100%">
+        <div class="col">
+            <div class="row" id="PlanContainer">
+                <div class="col-12 col-md-3">
+                    <div class="row" style="border-right-color:#e44d94">
+                        <div class="col-4 col-md-12 d-md-flex justify-content-md-center align-items-md-center mt-2 mb-2">
+                            <img class="img-fluid m-auto" id="PlanStatusLogo" src="Content/icon/@Status">
+                        </div>
+                        <div class="col-8 col-md-12  d-flex align-items-center justify-content-md-center mb-2">
+                            <p>@((MarkupString)InfoLine)</p>
+
+                        </div>
+                        <div class="col text-center">
+                            <img class="img-fluid m-auto" id="PlanImg" src="Content/img/@PlanPath">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 d-flex justify-content-center m-auto">
+                    <video class="img-fluid" id="PlanAnimation" loop autoplay="autoplay">
+                        <source src="Content/videos/@Annimation" type="video/mp4">
+
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<Footer NextIsVisible="true" PrevIsVisible="true" Next="Build" Previous="Checkout" />
+
+@code {
+    //status :
+    //option 1 = single
+    //option 2 = student
+    //option 3 = Family
+    //option 4 = Old
+    [Parameter]
+    public AppModel model { get; set; }
+    [Parameter]
+    public string PlanPath { get; set; }
+    [Parameter]
+    public string Annimation { get; set; }
+    [Parameter]
+    public string Status { get; set; }
+    [Parameter]
+    public string InfoLine { get; set; }
+
+    protected override void OnInitialized()
+    {
+        model = sessionStorage.GetItem<AppModel>("AppModel") ?? new AppModel();
+        model.Residence = string.IsNullOrEmpty(model.Residence) ? "Option Unselected" : model.Residence;
+        model.Status = string.IsNullOrEmpty(model.Status) ? "Option Unselected" : model.Status;
+
+        if (model.Status == "Single")
+        {
+            PlanPath = "Plan_Pink.png";
+            Annimation = "Pink_Model_Animation.mp4";
+            Status = "Single_T.png";
+            InfoLine = "Single: " + model.Residence.Split(" ")[1] + "<br> 72 m2";
+        }
+        else if (model.Status == "Student")
+        {
+            PlanPath = "Plan_Orange.png";
+            Annimation = "Orange_Model_Animation.mp4";
+            Status = "Student_T.png";
+            InfoLine = "Student: " + model.Residence.Split(" ")[1] + "<br> 40 m2";
+        }
+        else if (model.Status == "Family")
+        {
+            PlanPath = "Plan_Purple.png";
+            Annimation = "Purple_Model_Animation.mp4";
+            Status = "Family_T.png";
+            InfoLine = "Family: " + model.Residence.Split(" ")[1] + "<br> 160 m2";
+        }
+        else if (model.Status == "Old")
+        {
+            PlanPath = "Plan_Blue.png";
+            Annimation = "Blue_Model_Animation.mp4";
+            Status = "Old_T.png";
+            InfoLine = "Old: " + model.Residence.Split(" ")[1] + "<br> 40 m2";
+        }
+        else
+        {
+            PlanPath = "Plan_Blue.png";
+            Annimation = "Blue_Model_Animation.mp4";
+            Status = "Old_T.png";
+        }
+
+    }
+
+}

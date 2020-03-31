@@ -1,0 +1,58 @@
+﻿@page "/Intro"
+@inject NavigationManager NavigationManager
+
+
+
+<main class="d-md-flex justify-content-md-center align-items-md-center container BodyWithFooter" id="Intro" style="overflow-y:auto;">
+    <div>
+        <div class="row" id="FirstRow">
+            <div class="col" style="margin: 0px;">
+                <p class="text-center">THE HOUSE OF THE FUTURE IS FLEXIBLE</p>
+                <p src="assets/img/intro_block3.png">WITH A NEW UNDERSTANDING OF SPACIAL FLEXIBILITY , THE RESIDENT THE BUILDINGS AND THE CITY: MYWU IS AN ONLINE PLATFORM THAT ALLOWS USERS TO PROGRAM THEIR LIVING SPACE, ACCORDING TO THEIR NEEDS.</p>
+            </div>
+        </div>
+        <div class="row" id="secoundRow">
+            <div class="col-12 col-md-3 d-flex justify-content-center align-items-center">
+                <img class="img-fluid introImg" src="Content/img/intro_block1.png">
+            </div>
+            <div class="col-12 col-md-1 d-flex justify-content-center align-items-center columnSeparator">
+                <img class="img-fluid d-none d-md-flex" src="Content/icon/arrow_T.png">
+                <img class="img-fluid d-flex d-md-none" src="Content/icon/arrow_Down_T.png">
+            </div>
+            <div class="col-12 col-md-2 d-flex justify-content-center align-items-center">
+                <img class="img-fluid introImg" src="Content/img/intro_block2.png">
+            </div>
+            <div class="col-12 col-md-1 d-flex justify-content-center align-items-center columnSeparator">
+                <img class="img-fluid d-none d-md-flex" src="Content/icon/arrow_T.png">
+                <img class="img-fluid d-flex d-md-none" src="Content/icon/arrow_Down_T.png">
+            </div>
+            <div class="col-12 col-md-2 d-flex justify-content-center align-items-center">
+                <img class="img-fluid introImg" src="Content/img/intro_block3.png">
+            </div>
+            <div class="col-12 col-md-1 d-flex justify-content-center align-items-center columnSeparator">
+                <img class="img-fluid d-none d-md-flex" src="Content/icon/arrow_T.png">
+                <img class="img-fluid d-flex d-md-none" src="Content/icon/arrow_Down_T.png">
+            </div>
+            <div class="col-12 col-md-2 d-flex justify-content-center align-items-center">
+                <img class="img-fluid introImg" src="Content/img/intro_block4.png">
+            </div>
+        </div>
+        <div class="row" id="thridRow">
+            <div class="col">
+                <p>MYWU DESIGN ENGINE, SEEKS TO GENERATE HOUSE UNITS BASED ON THE PREFERENCES OF USERS WHILE OFFERING A WIDE VARIATION OF SPACES IT ENSURES A COMPLETLY CUSTOMISED DESIGN.</p>
+                <p>THIS PLATFORM, SEEKS THE SINGULARITY OF EACH INHABITANT, ON WHICH WILL DEPEND &nbsp;THE FLEXIBILITY CITY OF THE FUTURE.</p>
+                <p class="text-center">IN ORDER DESIGN YOUR WU, PROCEED!</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<Footer NextIsVisible="true" PrevIsVisible="false" Next="SelectStatus" Previous="" />
+
+
+@code {
+    private void NavigateToUserInputComponent()
+    {
+        NavigationManager.NavigateTo("selectStatus");
+    }
+}

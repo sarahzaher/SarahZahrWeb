@@ -1,0 +1,50 @@
+﻿@page "/Checkout"
+@inject Blazored.SessionStorage.ISyncSessionStorageService sessionStorage
+<NavBar selectedPage="4"/>
+<main class="d-flex justify-content-center align-items-center container BodyWithFooterAndNav" id="Checkout">
+    <div>
+        <div class="row">
+            <div class="col text-center">
+                <img src="Content/icon/balanceLogo.png">
+                <h4 class="m-2"><strong>The Total Cost will be</strong></h4>
+                <h1 class="m-5"><strong id="Price">@Price.ToString("C0", new System.Globalization.CultureInfo("en"))</strong></h1>
+            </div>
+        </div>
+    </div>
+</main>
+<Footer NextIsVisible="true" PrevIsVisible="true" Next="Plan" Previous="RoomSelector" />
+@code {
+    //status :
+    //option 1 = single
+    //option 2 = student
+    //option 3 = Family
+    //option 4 = Old
+    [Parameter]
+    public AppModel model { get; set; }
+    [Parameter]
+    public int Price { get; set; }
+
+    protected override void OnInitialized()
+    {
+        model = sessionStorage.GetItem<AppModel>("AppModel") ?? new AppModel();
+        SetPrice();
+
+        base.OnInitialized();
+    }
+    public void SetPrice()
+    {
+        if (model.Residence == "option 1")
+        {
+            Price = 60000;
+        }
+        else if (model.Residence == "option 2")
+        {
+            Price = 72000;
+        }
+        else
+        {
+            Price = 105000;
+        }
+
+    }
+}

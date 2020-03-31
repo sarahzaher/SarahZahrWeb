@@ -1,0 +1,97 @@
+﻿@page "/SelectResident"
+@inject Blazored.SessionStorage.ISyncSessionStorageService sessionStorage
+
+
+
+
+
+<NavBar selectedPage="2"/>
+<main class="d-flex justify-content-center align-items-center container BodyWithFooterAndNav" id="UserInput">
+    <div>
+        <div class="row" id="firstRow">
+            <div class="col text-center">
+                <p>USER INPUT</p>
+                <p>Select the number of residents</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center @ColCss[0]">
+                <div class="d-flex justify-content-center align-items-center zoom2 userInputOptions @option1Css " style="background-color: #f4e0da;" @onclick="@(() => SetSelectedResident("option 1"))">
+                    1
+                </div>
+
+            </div>
+            <div class="col text-center @ColCss[1]">
+                <div class="d-flex justify-content-center align-items-center zoom2 userInputOptions @option2Css" style="background-color: #f4e0da;" @onclick="@(() => SetSelectedResident("option 2"))">
+                    2
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center @ColCss[2]">
+                <div class=" d-flex justify-content-center align-items-center zoom2 userInputOptions @option3Css" style="background-color: #f4e0da;" @onclick="@(() => SetSelectedResident("option 3"))">
+                    3
+                </div>
+            </div>
+            <div class="col text-center @ColCss[3]">
+                <div class="d-flex justify-content-center align-items-center zoom2 userInputOptions  @option4Css" style="background-color: #f4e0da;" @onclick="@(() => SetSelectedResident("option 4"))">
+                    4
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<Footer NextIsVisible="true" PrevIsVisible="true" Next="RoomSelector" Previous="SelectStatus" />
+@code {
+    [Parameter]
+    public string option1Css { get; set; }
+    [Parameter]
+    public string option2Css { get; set; }
+    [Parameter]
+    public string option3Css { get; set; }
+    [Parameter]
+    public string option4Css { get; set; }
+    [Parameter]
+    public string[] ColCss { get; set; }
+
+    public AppModel model { get; set; }
+
+    void SetSelectedResident(string option)
+    {
+        model.Residence = option;
+        sessionStorage.SetItem("AppModel", model);
+
+        option1Css = option == "option 1" ? "zoom2Perm" : "";
+        option2Css = option == "option 2" ? "zoom2Perm" : "";
+        option3Css = option == "option 3" ? "zoom2Perm" : "";
+        option4Css = option == "option 4" ? "zoom2Perm" : "";
+
+    }
+
+
+    protected override void OnInitialized()
+    {
+        model = sessionStorage.GetItem<AppModel>("AppModel") ?? new AppModel();
+        ColCss = new string[4];
+        if (!string.IsNullOrEmpty(model.Status) && model.Status == "Single" || model.Status == "Student" || model.Status == "Old")
+        {
+
+            ColCss[2] = "d-none";
+            ColCss[3] = "d-none";
+
+        }
+        else if (!string.IsNullOrEmpty(model.Status) && model.Status == "Family")
+        {
+            ColCss[0] = "d-none";
+            ColCss[1] = "d-none";
+        }
+
+        if (model.Residence != null)
+        {
+
+            SetSelectedResident(model.Residence);
+        }
+    }
+}

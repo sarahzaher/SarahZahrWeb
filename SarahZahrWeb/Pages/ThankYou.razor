@@ -1,0 +1,28 @@
+﻿@page "/ThankYou"
+@inject NavigationManager NavigationManager
+
+<main class="d-flex justify-content-center align-items-center container" style="height:100%">
+    <div>
+        <div class="row">
+            <div class="col">
+                <h4 class="text-center">Thank your for your purchase.</h4>
+                <h4 class="text-center">Hope you'll enjoy your WU!</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center"><img src="Content/icon/logo_T.png"></div>
+        </div>
+        <div class="row">
+            <div class="col text-center m-3">
+                <img class="img-fluid zoom2" id="btnStart" src="Content/icon/btn_start_T.png" @onclick="NavigateToIntroComponent">
+            </div>
+        </div>
+    </div>
+</main>
+
+@code {
+    private void NavigateToIntroComponent()
+    {
+        NavigationManager.NavigateTo("SelectStatus");
+    }
+}

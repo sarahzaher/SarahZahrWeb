@@ -2,36 +2,39 @@
 @inject Blazored.SessionStorage.ISyncSessionStorageService sessionStorage
 
 <NavBar selectedPage="6"/>
-<main class="d-flex justify-content-center align-items-center container-fluid BodyWithFooterAndNav">
-    <div style="height:100%">
-        <div class="row" style="height:inherit">
-            <div class="col  d-flex align-content-center justify-content-center">
-                <img class="img-fluid" style="max-height:100%" src="Content/img/@endResult">
+<main class="container-fluid BodyWithFooterAndNav">
+    <div class="row h-100">
+            <div class="col-md-6  my-auto">
+                <img class="img-fluid" src="Content/img/@endResultPart1">
+            </div>
+            <div class="col-md-6 my-auto ">
+                <img class="img-fluid"  src="Content/img/@endResultPart2">
             </div>
         </div>
-    </div>
 </main>
 <Footer NextIsVisible="true" PrevIsVisible="true" Next="ThankYou" Previous="Plan" />
 
 @code {
-    //status :
-    //option 1 = single
-    //option 2 = student
-    //option 3 = Family
-    //option 4 = Old
+
     [Parameter]
     public AppModel model { get; set; }
     [Parameter]
-    public string endResult { get; set; }
+    public string endResultPart1 { get; set; }
+    [Parameter]
+    public string endResultPart2 { get; set; }
     protected override void OnInitialized()
     {
         model = sessionStorage.GetItem<AppModel>("AppModel") ?? new AppModel();
         if (!string.IsNullOrEmpty(model.Status))
         {
-            endResult = model.Status == "Single" ? "EndResult_Model_Pink.jpg" :
-                model.Status == "Student" ? "EndResult_Model_Orange.jpg" :
-                model.Status == "Family" ? "EndResult_Model_Purple.jpg" :
-                model.Status == "Old" ? "EndResult_Model_Blue.jpg" : "";
+            endResultPart1 = model.Status == "Single" ? "EndResult_Model_Pink_Part1.jpg" :
+                model.Status == "Student" ? "EndResult_Model_Orange_Part1.jpg" :
+                model.Status == "Family" ? "EndResult_Model_Purple_Part1.jpg" :
+                model.Status == "Old" ? "EndResult_Model_Blue_Part1.jpg" : "";
+            endResultPart2 = model.Status == "Single" ? "EndResult_Model_Pink_Part2.jpg" :
+                model.Status == "Student" ? "EndResult_Model_Orange_Part2.jpg" :
+                model.Status == "Family" ? "EndResult_Model_Purple_Part2.jpg" :
+                model.Status == "Old" ? "EndResult_Model_Blue_Part2.jpg" : "";
         }
     }
 

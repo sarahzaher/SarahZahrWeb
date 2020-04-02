@@ -1,6 +1,6 @@
 ﻿@inject NavigationManager NavigationManager
 <img src="Content/icon/logo_T.png" id="MainLogo" />
-<div class="container-fluid d-none  d-md-flex justify-content-md-center align-items-md-center">
+<div class="container-fluid  d-flex justify-content-center align-items-center">
 
     @*<div class="row">
             <div class="progress" id="progress1">
@@ -12,27 +12,27 @@
         </div>*@
     <div class="row d-flex justify-content-center align-items-center">
         <div class="row step">
-            <div id="div1" class="col-md-2 @active[0]" @onclick="@(() => { NavigateToComponent("SelectStatus"); })">
+            <div id="div1" class=" col-2 col-md-2 @active[0]" @onclick="@(() => { NavigateToComponent("SelectStatus"); })">
                 <span class="fa fa-user"></span>
                 <p>Status</p>
             </div>
-            <div class="col-md-2 @active[1]" @onclick="@(() => { NavigateToComponent("SelectResident"); })">
+            <div class="col-2 col-md-2 @active[1]" @onclick="@(() => { NavigateToComponent("SelectResident"); })">
                 <span class="fa fa-users"></span>
                 <p>Residents</p>
             </div>
-            <div class="col-md-2 @active[2]" @onclick="@(() => { NavigateToComponent("RoomSelector"); })">
+            <div class="col-2 col-md-2 @active[2]" @onclick="@(() => { NavigateToComponent("RoomSelector"); })">
                 <span class="fa fa-object-ungroup"></span>
                 <p>Models</p>
             </div>
-            <div class="col-md-2 @active[3]" @onclick="@(() => { NavigateToComponent("Checkout"); })">
+            <div class="col-2 col-md-2 @active[3]" @onclick="@(() => { NavigateToComponent("Checkout"); })">
                 <span class="fa fa-dollar"></span>
                 <p>Checkout</p>
             </div>
-            <div class="col-md-2 @active[4]" @onclick="@(() => { NavigateToComponent("Plan"); })">
+            <div class="col-2 col-md-2 @active[4]" @onclick="@(() => { NavigateToComponent("Plan"); })">
                 <span class="fa fa-map"></span>
                 <p>Plan</p>
             </div>
-            <div id="last" class="col-md-2 @active[5]" @onclick="@(() => { NavigateToComponent("Build"); })">
+            <div id="last" class="col-2 col-md-2 @active[5]" @onclick="@(() => { NavigateToComponent("Build"); })">
                 <span class="fa fa-home"></span>
                 <p>Build</p>
             </div>

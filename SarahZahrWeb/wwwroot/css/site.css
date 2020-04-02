@@ -196,10 +196,12 @@ app {
     font-family: 'customFont';
     src: url('../Content/font/TCCEB.TTF') format('truetype');
 }
+
 html, body {
     height: 100%;
     font-family: customFont;
 }
+
 .BodyWithFooter {
     height: calc(100% - 90px);
     /*max-height: 94vh;*/
@@ -208,170 +210,206 @@ html, body {
 .BodyWithoutFooter {
     min-height: 100%;
 }
-.BodyWithFooterAndNav {
+
+/*.BodyWithFooterAndNav {
     height: calc(100% - 90px);
+}*/
+.BodyWithFooterAndNav {
+    height: calc(100% - 175px);
 }
-@media (min-width: 768px) {
+/*@media (min-width: 768px) {
     .BodyWithFooterAndNav {
         height: calc(100% - 175px);
     }
+}*/
+
+Main {
+    overflow-y: auto;
 }
-    Main {
-        overflow-y: auto;
-    }
 
-    .footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 90px;
-        /*min-height: 80px;*/
-        line-height: 90px;
-        /*border-top: #e44d94 solid;*/
-        /*background-color: #f5f5f5;*/
-    }
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 90px;
+    /*min-height: 80px;*/
+    line-height: 90px;
+    /*border-top: #e44d94 solid;*/
+    /*background-color: #f5f5f5;*/
+}
 
-    /*.btnOption2 {
+/*.btnOption2 {
     font-weight: bold;
     background-color: #e0c5d8;
     font-style: inherit;
 }*/
 
-    /*
+/*
     Color Ref:
     Pink : #f49ac0
     Blue : #6ea2d1
     Orange: #f78c16
 */
 
-    .btnOption1 {
-        font-weight: bold;
-        height: 50px;
-        width: 50px;
-        background-color: #e0c5d8;
-        font-style: inherit;
-    }
+.btnOption1 {
+    font-weight: bold;
+    height: 50px;
+    width: 50px;
+    background-color: #e0c5d8;
+    font-style: inherit;
+}
 
-    .LogoBlueBox {
-        background-color: #6ea2d1;
-        height: 69px;
-        width: 69px;
-        margin-left: 5px;
-    }
+.LogoBlueBox {
+    background-color: #6ea2d1;
+    height: 69px;
+    width: 69px;
+    margin-left: 5px;
+}
 
-    .LogoPinkBox {
-        background-color: #f49ac0;
-        height: 69px;
-        width: 69px;
-        margin-left: 5px;
-    }
+.LogoPinkBox {
+    background-color: #f49ac0;
+    height: 69px;
+    width: 69px;
+    margin-left: 5px;
+}
 
-    .LogoOrangeBox {
-        background-color: #f78c16;
-        height: 69px;
-        width: 69px;
-        margin-left: 5px;
-    }
+.LogoOrangeBox {
+    background-color: #f78c16;
+    height: 69px;
+    width: 69px;
+    margin-left: 5px;
+}
 
-    .zoom2:hover {
-        transform: scale(1.05);
-        cursor: pointer;
-    }
+.zoom2:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
 
-    .zoom2Perm {
-        transform: scale(1.05);
-        cursor: pointer;
-        border: #e44d94 solid;
-    }
+.zoom2Perm {
+    transform: scale(1.05);
+    cursor: pointer;
+    border: #e44d94 solid;
+}
 
-    .zoom:hover {
-        transform: scale(1.1);
-        cursor: pointer;
-    }
+.zoom:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
 
-    .zoomPerm {
-        transform: scale(1.1);
-        cursor: pointer;
-        border: #e44d94 solid;
-    }
+.zoomPerm {
+    transform: scale(1.1);
+    cursor: pointer;
+    border: #e44d94 solid;
+}
 
+#MainLogo {
+    display: none;
+}
+
+@media (min-width: 768px) {
     #MainLogo {
-        display: none;
+        display: flex;
+        width: 110px;
+        float: left;
+        position: absolute;
+    }
+}
+/* NavBar*/
+.progress {
+    position: relative;
+    height: 25px;
+}
+
+    .progress > .progress-type {
+        position: absolute;
+        left: 0px;
+        font-weight: 800;
+        padding: 3px 30px 2px 10px;
+        color: rgb(255, 255, 255);
+        background-color: rgba(25, 25, 25, 0.2);
+    }
+
+    .progress > .progress-completed {
+        position: absolute;
+        right: 0px;
+        font-weight: 800;
+        padding: 3px 10px 2px;
+    }
+
+.step {
+    text-align: center;
+}
+
+    .step .col-md-2 {
+        background-color: #fff;
+        border: 1px solid #C0C0C0;
+        border-right: none;
+        padding:0px 7px 0px 7px;
+    }
+
+@media (min-width: 768px) {
+    .step .col-md-2 {
+    padding-right:15px;
+    padding-left:15px;
+ 
+    }
+}
+.step .col-md-2 p {
+    font-size:13px;
+}
+@media (min-width: 768px) {
+    .step .col-md-2 p {
+        font-size:initial;
+    }
+}
+    .step .col-md-2:last-child {
+        border: 1px solid #C0C0C0;
+    }
+
+    .step .col-md-2:first-child {
+        border-radius: 5px 0 0 5px;
+    }
+
+    .step .col-md-2:last-child {
+        border-radius: 0 5px 5px 0;
+    }
+
+    .step .col-md-2:hover {
+        color: #e44d94;
+        cursor: pointer;
+    }
+
+    .step .activestep {
+        color: #e44d94;
+        height: 100px;
+        margin-top: -7px;
+        padding-top: 7px;
+        border-left: 2px solid #6ea2d1 !important;
+        border-right: 2px solid #6ea2d1 !important;
+        border-top: 1px solid #6ea2d1 !important;
+        border-bottom: 1px solid #6ea2d1 !important;
+        vertical-align: central;
     }
 
     @media (min-width: 768px) {
-        #MainLogo {
-            display: flex;
-            width: 110px;
-            float: left;
-            position: absolute;
-        }
-    }
-    /* NavBar*/
-    .progress {
-        position: relative;
-        height: 25px;
-    }
-
-        .progress > .progress-type {
-            position: absolute;
-            left: 0px;
-            font-weight: 800;
-            padding: 3px 30px 2px 10px;
-            color: rgb(255, 255, 255);
-            background-color: rgba(25, 25, 25, 0.2);
-        }
-
-        .progress > .progress-completed {
-            position: absolute;
-            right: 0px;
-            font-weight: 800;
-            padding: 3px 10px 2px;
-        }
-
-    .step {
-        text-align: center;
-    }
-
-        .step .col-md-2 {
-            background-color: #fff;
-            border: 1px solid #C0C0C0;
-            border-right: none;
-        }
-
-            .step .col-md-2:last-child {
-                border: 1px solid #C0C0C0;
-            }
-
-            .step .col-md-2:first-child {
-                border-radius: 5px 0 0 5px;
-            }
-
-            .step .col-md-2:last-child {
-                border-radius: 0 5px 5px 0;
-            }
-
-            .step .col-md-2:hover {
-                color: #e44d94;
-                cursor: pointer;
-            }
-
         .step .activestep {
-            color: #e44d94;
-            height: 100px;
-            margin-top: -7px;
-            padding-top: 7px;
             border-left: 6px solid #6ea2d1 !important;
             border-right: 6px solid #6ea2d1 !important;
             border-top: 3px solid #6ea2d1 !important;
             border-bottom: 3px solid #6ea2d1 !important;
-            vertical-align: central;
+            height: 100px;
         }
+    }
 
-        .step .fa {
-            padding-top: 15px;
-            font-size: 40px;
-        }
+    .step .fa {
+        padding-top: 15px;
+        font-size: 35px;
+    }
+@media (min-width: 768px) {
+    .step .fa {
+        font-size: 40px;
+    }
+}
     /*  end of navbar     */
 
     /* Welcome Page  */
@@ -522,16 +560,16 @@ html, body {
 
 
 
-#CustomRooms .SelectedModelCountainer {
-    /*border: #e44d94 solid;*/
-    width: 100%;
-    height: 100%;
-    background: #e34d9417;
-    float: left;
-    border: 2px solid #000;
-    outline: 1px dashed #fff;
-    outline-offset: -10px;
-}
+    #CustomRooms .SelectedModelCountainer {
+        /*border: #e44d94 solid;*/
+        width: 100%;
+        height: 100%;
+        background: #e34d9417;
+        float: left;
+        border: 2px solid #000;
+        outline: 1px dashed #fff;
+        outline-offset: -10px;
+    }
 
     /*  End of room selector */
     /*Checkout*/
